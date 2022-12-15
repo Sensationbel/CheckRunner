@@ -1,0 +1,32 @@
+-- changeSet Bulaukin:1-4:insertSQLProducts
+
+insert into products (id, price, discount, items) values (1, 4774.55, 44, 'Monterey');
+insert into products (id, price, discount, items) values (2, 7026.64, 13, 'Rodeo');
+insert into products (id, price, discount, items) values (3, 9246.85, 23, 'Laser');
+insert into products (id, price, discount, items) values (4, 3411.31, 17, 'E-Series');
+insert into products (id, price, discount, items) values (5, 2278.69, 12, 'Montero');
+insert into products (id, price, discount, items) values (6, 5323.18, 16, 'MX-5');
+insert into products (id, price, discount, items) values (7, 6553.38, 12, 'S4');
+insert into products (id, price, discount, items) values (8, 5367.7, 24, 'Explorer');
+insert into products (id, price, discount, items) values (9, 3466.49, 14, 'Mark VIII');
+insert into products (id, price, discount, items) values (10, 471.4, 6, '2500');
+insert into products (id, price, discount, items) values (11, 6292.61, 37, 'Colt');
+insert into products (id, price, discount, items) values (12, 287.93, 46, 'JUKE');
+insert into products (id, price, discount, items) values (13, 1597.63, 14, 'Terraza');
+insert into products (id, price, discount, items) values (14, 7087.82, 18, 'Suburban');
+insert into products (id, price, discount, items) values (15, 204.08, 44, 'CTS');
+insert into products (id, price, discount, items) values (16, 4918.14, 42, 'GTI');
+insert into products (id, price, discount, items) values (17, 8378.51, 43, 'Corvette');
+insert into products (id, price, discount, items) values (18, 4883.53, 17, 'R32');
+insert into products (id, price, discount, items) values (19, 7884.57, 12, 'Blazer');
+insert into products (id, price, discount, items) values (20, 5913.66, 34, 'S80');
+insert into products (id, price, discount, items) values (21, 7660.97, 19, 'MKX');
+insert into products (id, price, discount, items) values (22, 3073.89, 43, 'Countach');
+insert into products (id, price, discount, items) values (23, 2181.12, 42, 'Sonata');
+insert into products (id, price, discount, items) values (24, 6276.1, 30, 'NV2500');
+insert into products (id, price, discount, items) values (25, 2130.08, 35, 'LS');
+insert into products (id, price, discount, items) values (26, 4495.09, 17, 'Tribute');
+insert into products (id, price, discount, items) values (27, 2156.03, 1, 'Edge');
+insert into products (id, price, discount, items) values (28, 3120.71, 38, 'Grand Prix');
+insert into products (id, price, discount, items) values (29, 2049.08, 36, 'F-Series');
+insert into products (id, price, discount, items) values (30, 4698.51, 22, 'XL-7');

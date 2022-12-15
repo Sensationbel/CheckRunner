@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-4
+      author: Bulaukin
+      changes:
+        - sqlFile:
+            path: sql\add-sqlInsert-table-products.sql
+            relativeToChangelogFile: true
+            splitStatements: false
+        #  - changeSet:
+#      id: 1-4
+#      author: Bulaukin
+#      changes:
+#        - sqlFile:
+#            path: sql\add-sqlInsert-table-products.sql
+#            relativeToChangelogFile: true
+#            splitStatements: false

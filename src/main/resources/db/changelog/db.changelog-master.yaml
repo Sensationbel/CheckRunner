@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: changeset/create-table-products.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changeset/create-table-cards.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changeset/add-data-table-cards.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: changeset/add-data-table-products.yaml
+      relativeToChangelogFile: true

@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-3
+      author: Bulaukin
+      changes:
+        - sqlFile:
+            path: sql\add-sqlInsert-table-cards.sql
+            relativeToChangelogFile: true
+            splitStatements: false

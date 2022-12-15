@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-2
+      author: Bulaukin
+      changes:
+        - createTable:
+            tableName: cards
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: card_number
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: discount
+                  type: SMALLINT
+                  defaultValueNumeric: '0'

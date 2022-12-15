@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-1
+      author: Bulaukin
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: INT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: items
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: DOUBLE
+                  defaultValueNumeric: '0.0'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: discount
+                  type: SMALLINT
+                  defaultValueNumeric: '0'

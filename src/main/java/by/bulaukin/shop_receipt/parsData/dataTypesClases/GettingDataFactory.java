@@ -1,8 +1,6 @@
-package by.bulaukin.shop_receipt.parsData;
+package by.bulaukin.shop_receipt.parsData.dataTypesClases;
 
-import by.bulaukin.shop_receipt.parsData.dataTypesClases.GettingDataFromConsole;
-import by.bulaukin.shop_receipt.parsData.dataTypesClases.GettingDataFromFile;
-import by.bulaukin.shop_receipt.parsData.dataTypesClases.GettingDataFromUrL;
+import by.bulaukin.shop_receipt.parsData.DataTypes;
 import org.springframework.stereotype.Component;
 
 @Component

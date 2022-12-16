@@ -1,8 +1,9 @@
 package by.bulaukin.shop_receipt;
 
+import by.bulaukin.shop_receipt.parsData.DataFromRequest;
 import by.bulaukin.shop_receipt.parsData.DataTypes;
-import by.bulaukin.shop_receipt.parsData.GettingData;
-import by.bulaukin.shop_receipt.parsData.GettingDataFactory;
+import by.bulaukin.shop_receipt.parsData.dataTypesClases.GettingData;
+import by.bulaukin.shop_receipt.parsData.dataTypesClases.GettingDataFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
@@ -23,10 +24,8 @@ public class ShopReceiptApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args1) throws Exception {
-		log.info("Executing : command line runner");
-
 		GettingData data = factory.getClass(DataTypes.CONSOLE);
-		data.parsData(args1);
+		DataFromRequest dataFromRequest = data.parsData(args1);
 
 
 	}

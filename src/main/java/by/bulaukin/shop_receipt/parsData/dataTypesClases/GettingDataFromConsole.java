@@ -1,23 +1,30 @@
 package by.bulaukin.shop_receipt.parsData.dataTypesClases;
 
 import by.bulaukin.shop_receipt.parsData.DataFromRequest;
-import by.bulaukin.shop_receipt.parsData.DataTypes;
-import by.bulaukin.shop_receipt.parsData.GettingData;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 public class GettingDataFromConsole implements GettingData {
 
-    private String regexItems = "(\\d+)(=)(\\d+)";
     @Override
     public <T> DataFromRequest parsData(T data) {
         DataFromRequest dataFromRequest = new DataFromRequest();
         String[] array = (String[]) data;
-        for (int i = 0; i < array.length; i++) {
-            if(array[i].matches(regexItems)){
-                System.out.println(array[i]);
+        String regexItems = "(\\d+)(-)(\\d+)";
+
+        for (String s : array) {
+            String[] split = s.split("-");
+
+            if (s.matches(regexItems)) {
+                dataFromRequest = new DataFromRequest
+                        .Builder(dataFromRequest)
+                        .addItems(Integer.valueOf(split[0]), Integer.valueOf(split[1]))
+                        .build();
+            } else if (s.startsWith("card")) {
+                dataFromRequest = new DataFromRequest
+                        .Builder(dataFromRequest)
+                        .addCardNumber(Integer.valueOf(split[1]))
+                        .build();
             }
         }
-        return null;
+        return dataFromRequest;
     }
 }

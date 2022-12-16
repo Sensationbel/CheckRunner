@@ -1,22 +1,24 @@
 package by.bulaukin.shop_receipt.parsData;
 
+import lombok.ToString;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@ToString
 public class DataFromRequest {
 
     private final Map<Integer,Integer> items = new HashMap<>();
-    private Integer cardNumber = 0;
+    private Integer cardNumber;
 
     public static class Builder {
 
         DataFromRequest data;
 
-        public Builder(){
-            this.data = new DataFromRequest();
+        public Builder(DataFromRequest data){
+            this.data = data;
         }
 
         public Builder addItems(Integer itemsId, Integer itemsCount) {

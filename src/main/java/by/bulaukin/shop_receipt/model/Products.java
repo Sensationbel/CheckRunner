@@ -1,4 +1,4 @@
-package by.bulaukin.shop_receipt.entity;
+package by.bulaukin.shop_receipt.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +16,8 @@ public class Products {
     private Integer id;
     private String items;
     private Double price;
-    private Short discount;
+    @Column(name = "is_on_sale")
+    private Short isOnSale;
 
 
 }

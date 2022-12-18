@@ -1,4 +1,4 @@
-package by.bulaukin.shop_receipt.entity;
+package by.bulaukin.shop_receipt.model;
 
 import lombok.Getter;
 import lombok.Setter;

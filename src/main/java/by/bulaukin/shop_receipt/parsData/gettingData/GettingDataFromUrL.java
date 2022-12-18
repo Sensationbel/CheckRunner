@@ -1,4 +1,4 @@
-package by.bulaukin.shop_receipt.parsData.dataTypesClases;
+package by.bulaukin.shop_receipt.parsData.gettingData;
 
 import by.bulaukin.shop_receipt.parsData.DataFromRequest;
 

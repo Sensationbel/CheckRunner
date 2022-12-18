@@ -1,5 +1,6 @@
 package by.bulaukin.shop_receipt.parsData;
 
+import lombok.Getter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@Getter
 @ToString
 public class DataFromRequest {
 

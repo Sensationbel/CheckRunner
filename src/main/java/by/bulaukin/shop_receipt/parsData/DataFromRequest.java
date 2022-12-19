@@ -15,20 +15,20 @@ public class DataFromRequest {
     private final Map<Integer,Integer> items = new HashMap<>();
     private Integer cardNumber;
 
-    public static class Builder {
+    public static class DataBuilder {
 
         DataFromRequest data;
 
-        public Builder(DataFromRequest data){
+        public DataBuilder(DataFromRequest data){
             this.data = data;
         }
 
-        public Builder addItems(Integer itemsId, Integer itemsCount) {
+        public DataBuilder addItems(Integer itemsId, Integer itemsCount) {
             this.data.items.put(itemsId, itemsCount);
             return this;
         }
 
-        public Builder addCardNumber(Integer cardNumber) {
+        public DataBuilder addCardNumber(Integer cardNumber) {
             this.data.cardNumber = cardNumber;
             return this;
         }

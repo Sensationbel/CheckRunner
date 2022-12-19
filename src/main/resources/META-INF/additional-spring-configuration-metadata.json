@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "shop.markets-address",
+      "type": "java.lang.String",
+      "description": "Description for shop.marketsAddress."
+    },
+    {
+      "name": "shop.markets-id",
+      "type": "java.lang.String",
+      "description": "Description for shop.marketsId."
+    },
+    {
+      "name": "shop.phone",
+      "type": "java.lang.String",
+      "description": "Description for shop.phone."
+    },
+    {
+      "name": "shop.receipt",
+      "type": "java.lang.String",
+      "description": "Description for shop.receipt."
+    },
+    {
+      "name": "sales.discount",
+      "type": "java.lang.Integer",
+      "description": "Discount for items which on sale."
+    },
+    {
+      "name": "number.discount",
+      "type": "java.lang.Integer",
+      "description": "Discount for items by number."
+    }
+  ] }

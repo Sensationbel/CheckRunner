@@ -14,13 +14,11 @@ public class GettingDataFromConsole implements GettingData {
             String[] split = s.split("-");
 
             if (s.matches(regexItems)) {
-                dataFromRequest = new DataFromRequest
-                        .Builder(dataFromRequest)
+                dataFromRequest = new DataFromRequest.DataBuilder(dataFromRequest)
                         .addItems(Integer.valueOf(split[0]), Integer.valueOf(split[1]))
                         .build();
             } else if (s.startsWith("card")) {
-                dataFromRequest = new DataFromRequest
-                        .Builder(dataFromRequest)
+                dataFromRequest = new DataFromRequest.DataBuilder(dataFromRequest)
                         .addCardNumber(Integer.valueOf(split[1]))
                         .build();
             }

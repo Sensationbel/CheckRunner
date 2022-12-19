@@ -1,5 +1,10 @@
 package by.bulaukin.shop_receipt;
 
+import by.bulaukin.shop_receipt.countcost.CountingCost;
+import by.bulaukin.shop_receipt.countcost.CountingItemsCost;
+import by.bulaukin.shop_receipt.countcost.countdiscount.CardDiscount;
+import by.bulaukin.shop_receipt.countcost.countdiscount.DiscountByNumber;
+import by.bulaukin.shop_receipt.countcost.countdiscount.SaleDiscount;
 import by.bulaukin.shop_receipt.entityToDto.ResultEntityToDto;
 import by.bulaukin.shop_receipt.entityToDto.ResultEntityToDtoService;
 import by.bulaukin.shop_receipt.parsData.DataFromRequest;
@@ -11,6 +16,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.math.BigDecimal;
 
 @SpringBootApplication
 @Log4j2
@@ -31,6 +38,16 @@ public class ShopReceiptApplication implements CommandLineRunner {
 		DataFromRequest dataFromRequest = data.parsData(args1);
 
 		ResultEntityToDto result = resultEntityToDtoService.getResult(dataFromRequest);
+
+		CountingCost cost = new CountingItemsCost();
+		cost.setPrice(30.5);
+		cost.setCount(1);
+		cost = new DiscountByNumber(cost);
+		cost = new SaleDiscount(cost);
+		cost = new CardDiscount(cost);
+		cost.setDiscount(15);
+
+		System.out.println("total cost: " + Math.ceil(cost.countCost() * 100)/100);
 
 
 	}

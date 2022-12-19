@@ -9,6 +9,7 @@ import by.bulaukin.shop_receipt.model.Products;
 import by.bulaukin.shop_receipt.parsData.DataFromRequest;
 import by.bulaukin.shop_receipt.repository.cards.GettingCards;
 import by.bulaukin.shop_receipt.repository.products.GettingProducts;
+import by.bulaukin.shop_receipt.repository.products.ProductsRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Log4j2
 public class ResultEntityToDtoService {
-
     private final GettingProducts gettingProducts;
     private final GettingCards gettingCards;
     private final ProductsToProductsDtoServices productsToProductsDtoServices;
@@ -25,18 +25,33 @@ public class ResultEntityToDtoService {
 
     public ResultEntityToDto getResult(DataFromRequest data){
         ResultEntityToDto result = new ResultEntityToDto();
-        data.getItems().forEach((k, v) ->{
-            Products products = getProducts(k);
-            ProductsDto prodDto = productsToProductsDtoServices
-                    .getProductsDto(products, v);
-            result.getProductsDtoList().add(prodDto);
-        });
-
-        Cards cards = getCards(data.getCardNumber());
-        CardsDto cardsDto = cardsToCardsDtoService.getCardsDto(cards);
-        result.setCardsDto(cardsDto);
-
+        addProductsDtoToResult(data, result);
+        addCardsDtoToResult(data, result);
         return result;
+    }
+
+    private void addCardsDtoToResult(DataFromRequest data, ResultEntityToDto result) {
+        try {
+        Cards cards = getCards(data.getCardNumber());
+
+            CardsDto cardsDto = cardsToCardsDtoService.getCardsDto(cards);
+            result.setCardsDto(cardsDto);
+        }catch (NullPointerException e){
+            log.info("Card is not found");
+        }
+    }
+
+    private void addProductsDtoToResult(DataFromRequest data, ResultEntityToDto result) {
+        data.getItems().forEach((k, v) ->{
+            try {
+                Products products = getProducts(k);
+                ProductsDto prodDto = productsToProductsDtoServices
+                        .getProductsDto(products, v);
+                result.getProductsDtoList().add(prodDto);
+            } catch(NullPointerException e){
+                log.info("Item by id {} is not found", k);
+            }
+        });
     }
 
     private Products getProducts(Integer productsId) {

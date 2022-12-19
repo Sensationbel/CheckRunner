@@ -13,4 +13,13 @@ spring:
     change-log: db/changelog/db.changelog-master.yaml
   main:
     web-application-type: none
+shop:
+  receipt: CASH RECEIPT
+  markets-id: SUPERMARKET 123
+  markets-address: planet Earth
+  phone: +375(29) 123-123-12
 
+sales:
+  discount: 5
+number:
+  discount: 10

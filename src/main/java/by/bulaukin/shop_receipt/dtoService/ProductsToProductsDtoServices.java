@@ -11,7 +11,9 @@ public class ProductsToProductsDtoServices {
         ProductsDto dto = new ProductsDto();
         dto.setPrice(product.getPrice());
         dto.setItems(product.getItems());
+        dto.setOnSale(product.getIsOnSale() == 1 ? true : false);
         dto.setCount(countItems);
+        dto.setItemsTotalPrice(Math.ceil(product.getPrice() * countItems * 100)/100);
         return dto;
     }
 }

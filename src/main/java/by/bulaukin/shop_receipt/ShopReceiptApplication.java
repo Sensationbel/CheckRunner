@@ -11,13 +11,12 @@ import by.bulaukin.shop_receipt.parsData.DataFromRequest;
 import by.bulaukin.shop_receipt.parsData.DataTypes;
 import by.bulaukin.shop_receipt.parsData.gettingData.GettingData;
 import by.bulaukin.shop_receipt.parsData.gettingData.GettingDataFactory;
+import by.bulaukin.shop_receipt.view.ViewServices;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.math.BigDecimal;
 
 @SpringBootApplication
 @Log4j2
@@ -27,7 +26,7 @@ public class ShopReceiptApplication implements CommandLineRunner {
 	private final ResultEntityToDtoService resultEntityToDtoService;
 	public static void main(String[] args) {
 		log.info("Starting the Application");
-		String[] args1 = new String[] {"3-1", "2-5", "5-1", "card-4574"};
+		String[] args1 = new String[] {"12-6", "13-6", "5-1", "card-2569"};
 		SpringApplication.run(ShopReceiptApplication.class, args1);
 		log.info("Finished the Application");
 	}
@@ -38,16 +37,18 @@ public class ShopReceiptApplication implements CommandLineRunner {
 		DataFromRequest dataFromRequest = data.parsData(args1);
 
 		ResultEntityToDto result = resultEntityToDtoService.getResult(dataFromRequest);
+		ViewServices services = new ViewServices(result);
+		services.createsView();
 
-		CountingCost cost = new CountingItemsCost();
-		cost.setPrice(30.5);
-		cost.setCount(1);
-		cost = new DiscountByNumber(cost);
-		cost = new SaleDiscount(cost);
-		cost = new CardDiscount(cost);
-		cost.setDiscount(15);
-
-		System.out.println("total cost: " + Math.ceil(cost.countCost() * 100)/100);
+//		CountingCost cost = new CountingItemsCost();
+//		cost.setPrice(30.5);
+//		cost.setCount(1);
+//		cost = new DiscountByNumber(cost);
+//		cost = new SaleDiscount(cost);
+//		cost = new CardDiscount(cost);
+//		cost.setDiscount(15);
+//
+//		System.out.println("total cost: " + Math.ceil(cost.countCost() * 100)/100);
 
 
 	}

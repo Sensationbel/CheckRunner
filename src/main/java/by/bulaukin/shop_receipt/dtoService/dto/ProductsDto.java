@@ -8,6 +8,8 @@ import lombok.Setter;
 public class ProductsDto {
 
     private String items;
-    private Double price;
-    private Integer count;
+    private double price;
+    private int count;
+    private double itemsTotalPrice;
+    private boolean isOnSale;
 }

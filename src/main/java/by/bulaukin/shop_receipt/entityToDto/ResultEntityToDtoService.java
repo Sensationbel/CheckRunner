@@ -23,7 +23,7 @@ public class ResultEntityToDtoService {
     private final ProductsToProductsDtoServices productsToProductsDtoServices;
     private final CardsToCardsDtoService cardsToCardsDtoService;
 
-    public ResultEntityToDto getResult(DataFromRequest data){
+    public ResultEntityToDto getResult(DataFromRequest data) {
         ResultEntityToDto result = new ResultEntityToDto();
         addProductsDtoToResult(data, result);
         addCardsDtoToResult(data, result);
@@ -32,30 +32,29 @@ public class ResultEntityToDtoService {
 
     private void addCardsDtoToResult(DataFromRequest data, ResultEntityToDto result) {
         try {
-        Cards cards = getCards(data.getCardNumber());
-
+            Cards cards = getCards(data.getCardNumber());
             CardsDto cardsDto = cardsToCardsDtoService.getCardsDto(cards);
-            result.setCardsDto(cardsDto);
-        }catch (NullPointerException e){
+            result.setCardDiscount(cardsDto.getDiscount());
+        } catch (NullPointerException e) {
             log.info("Card is not found");
         }
     }
 
     private void addProductsDtoToResult(DataFromRequest data, ResultEntityToDto result) {
-        data.getItems().forEach((k, v) ->{
+        data.getItems().forEach((k, v) -> {
             try {
-                Products products = getProducts(k);
+                Products prod = getProducts(k);
                 ProductsDto prodDto = productsToProductsDtoServices
-                        .getProductsDto(products, v);
+                        .getProductsDto(prod, v);
                 result.getProductsDtoList().add(prodDto);
-            } catch(NullPointerException e){
+            } catch (NullPointerException e) {
                 log.info("Item by id {} is not found", k);
             }
         });
     }
 
     private Products getProducts(Integer productsId) {
-            return gettingProducts.getProductsById(productsId);
+        return gettingProducts.getProductsById(productsId);
 
     }
 

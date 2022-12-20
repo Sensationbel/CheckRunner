@@ -13,13 +13,15 @@ spring:
     change-log: db/changelog/db.changelog-master.yaml
   main:
     web-application-type: none
+    allow-circular-references: false
+server:
+  port: 8080
 shop:
-  receipt: CASH RECEIPT
-  markets-id: SUPERMARKET 123
-  markets-address: planet Earth
-  phone: +375(29) 123-123-12
+  receipt: "CASH RECEIPT"
+  markets-id: "SUPERMARKET 123"
+  markets-address: "planet Earth"
+  phone: "+375(29) 123-123-12"
 
 sales:
-  discount: 5
-number:
-  discount: 10
+  sales-discount: 5
+  number-discount: 10

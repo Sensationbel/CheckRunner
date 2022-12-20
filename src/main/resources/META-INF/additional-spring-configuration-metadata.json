@@ -22,12 +22,12 @@
     },
     {
       "name": "sales.discount",
-      "type": "java.lang.Integer",
+      "type": "java.lang.Short",
       "description": "Discount for items which on sale."
     },
     {
       "name": "number.discount",
-      "type": "java.lang.Integer",
+      "type": "java.lang.Short",
       "description": "Discount for items by number."
     }
   ] }

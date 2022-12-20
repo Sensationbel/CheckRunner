@@ -5,11 +5,11 @@ import lombok.Setter;
 import org.springframework.stereotype.Service;
 
 @Getter
-@Setter@Service
+@Setter
 public abstract class CountingCost {
 
     private double price;
     private int count;
-    private int discount;
+    private Short discount;
     public abstract double countCost();
 }

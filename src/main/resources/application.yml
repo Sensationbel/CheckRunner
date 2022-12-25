@@ -7,12 +7,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
   liquibase:
     enabled: true
     change-log: db/changelog/db.changelog-master.yaml
   main:
-    web-application-type: none
     allow-circular-references: false
 server:
   port: 8080
@@ -24,4 +23,7 @@ shop:
 
 sales:
   sales-discount: 5
+  card-discount: 5
   number-discount: 10
+download:
+  path: C:/Users/Sensationbel/Desktop/receipt.txt

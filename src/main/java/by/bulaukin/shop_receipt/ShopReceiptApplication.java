@@ -1,17 +1,8 @@
 package by.bulaukin.shop_receipt;
 
-import by.bulaukin.shop_receipt.countcost.CountingCost;
-import by.bulaukin.shop_receipt.countcost.CountingItemsCost;
-import by.bulaukin.shop_receipt.countcost.countdiscount.CardDiscount;
-import by.bulaukin.shop_receipt.countcost.countdiscount.DiscountByNumber;
-import by.bulaukin.shop_receipt.countcost.countdiscount.SaleDiscount;
-import by.bulaukin.shop_receipt.entityToDto.ResultEntityToDto;
-import by.bulaukin.shop_receipt.entityToDto.ResultEntityToDtoService;
-import by.bulaukin.shop_receipt.parsData.DataFromRequest;
-import by.bulaukin.shop_receipt.parsData.DataTypes;
-import by.bulaukin.shop_receipt.parsData.gettingData.GettingData;
-import by.bulaukin.shop_receipt.parsData.gettingData.GettingDataFactory;
-import by.bulaukin.shop_receipt.view.ViewServices;
+import by.bulaukin.shop_receipt.run_app.DataFromConsole;
+import by.bulaukin.shop_receipt.run_app.RunningApp;
+import by.bulaukin.shop_receipt.run_app.RunningAppFromConsole;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.CommandLineRunner;
@@ -22,33 +13,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Log4j2
 @RequiredArgsConstructor
 public class ShopReceiptApplication implements CommandLineRunner {
-	private final GettingDataFactory factory;
-	private final ResultEntityToDtoService resultEntityToDtoService;
+
+	private final RunningApp runningAppFromFile;
+	private final DataFromConsole dataFromConsole;
+
 	public static void main(String[] args) {
 		log.info("Starting the Application");
-		String[] args1 = new String[] {"12-6", "13-6", "5-1", "card-2569"};
-		SpringApplication.run(ShopReceiptApplication.class, args1);
+		String[] args1 = new String[] {"11-6", "13-6", "5-1", "1-3", "20-2", "card-2569 "};
+		String[] args2 = new String[] {"C:\\Users\\Sensationbel\\Desktop\\data.txt"};
+		SpringApplication.run(ShopReceiptApplication.class, args2);
 		log.info("Finished the Application");
 	}
 
 	@Override
-	public void run(String... args1) throws Exception {
-		GettingData data = factory.getClass(DataTypes.CONSOLE);
-		DataFromRequest dataFromRequest = data.parsData(args1);
-
-		ResultEntityToDto result = resultEntityToDtoService.getResult(dataFromRequest);
-		ViewServices services = new ViewServices(result);
-		services.createsView();
-
-//		CountingCost cost = new CountingItemsCost();
-//		cost.setPrice(30.5);
-//		cost.setCount(1);
-//		cost = new DiscountByNumber(cost);
-//		cost = new SaleDiscount(cost);
-//		cost = new CardDiscount(cost);
-//		cost.setDiscount(15);
-//
-//		System.out.println("total cost: " + Math.ceil(cost.countCost() * 100)/100);
+	public void run(String... args) throws Exception {
+		dataFromConsole.setArgs(args);
+		runningAppFromFile.run();
 
 
 	}

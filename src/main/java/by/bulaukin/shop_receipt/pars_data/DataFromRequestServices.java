@@ -1,44 +1,48 @@
 package by.bulaukin.shop_receipt.pars_data;
 
+import by.bulaukin.shop_receipt.pars_data.data.DataFromRequest;
+import by.bulaukin.shop_receipt.pars_data.data.ItemsFromRequest;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 @Log4j2
+@RequiredArgsConstructor
 public class DataFromRequestServices{
 
-    @Autowired
-    private DataFromRequest.DataBuilder dataFromRequest;
+    private final DataFromRequest dataFromRequest;
 
-    public DataFromRequest parsData(String[] data) {
+    public DataFromRequest addDataToDatafromRequest(String[] data) {
+
         String regexItems = "(\\d+)(-)(\\d+)";
         String regexCard = "(card)(-)(\\d+)";
 
-        for (String s : data) {
-            s = s.trim();
-            String[] split = s.split("-");
+        for (String d : data) {
+            d = d.trim();
+            String[] split = d.split("-");
 
             try {
-                if (validate(s, regexItems, regexCard)) {
-                    if (s.matches(regexItems)) {
-                        dataFromRequest
-                                .addItems(Integer.valueOf(split[0]), Integer.valueOf(split[1]));
-                    } else if (s.matches(regexCard)) {
-                        dataFromRequest
-                                .addCardNumber(Integer.valueOf(split[1]));
+                if (validate(d, regexItems, regexCard)) {
+                    if (d.matches(regexItems)) {
+                        ItemsFromRequest items = new ItemsFromRequest();
+                        items.setItemsId(Integer.valueOf(split[0]));
+                        items.setItemsCount(Integer.valueOf(split[1]));
+                        dataFromRequest.getItems().add(items);
+                    } else if (d.matches(regexCard)) {
+                        dataFromRequest.setCardNumber(Integer.valueOf(split[1]));
                     }
                 }
             } catch (IllegalArgumentException e) {
                 log.error(e.getMessage());
             }
         }
-        return dataFromRequest.build();
+        return dataFromRequest;
     }
 
-    private boolean validate(String s, String regexItems, String regexCard) {
-        if (s.matches(regexItems) || s.matches(regexCard)) {
+    private boolean validate(String data, String regexItems, String regexCard) {
+        if (data.matches(regexItems) || data.matches(regexCard)) {
             return true;
-        } else throw new IllegalArgumentException(s + " is not a valid");
+        } else throw new IllegalArgumentException(data + " is not a valid");
     }
 }

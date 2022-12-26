@@ -13,6 +13,11 @@ spring:
     change-log: db/changelog/db.changelog-master.yaml
   main:
     allow-circular-references: false
+  web:
+    resources:
+      static-locations: classpath:/frontend/
+  thymeleaf:
+    prefix: classpath:/frontend/
 server:
   port: 8080
 shop:

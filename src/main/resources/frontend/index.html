@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shops Receipts</title>
+</head>
+<body>
+<div id="input data">
+    <form method="post" th:action="@{/addItems}" th:object="${dataFromRequest}">
+        <table>
+            <thead>
+            <tr>
+                <th th:text="${'Num'}"></th>
+                <th th:text="${'Prod Id'}">Row</th>
+                <th th:text="${'Prod Count'}">Variety</th>
+
+                <th>
+                    <button type="submit" name="addRow" th:text="${'Add Row'}">Add row</button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row,rowStat : *{items}">
+                <td th:text="${rowStat.count}">1</td>
+                <td>
+                    <input placeholder="Items Id" type="text" th:field="*{items[__${rowStat.index}__].itemsId}">
+                </td>
+                <td>
+                    <input placeholder="Items count" type="text" th:field="*{items[__${rowStat.index}__].itemsCount}"/>
+                </td>
+                <td>
+                    <button type="submit" name="removeRow"
+                            th:value="${rowStat.index}" th:text="${'Remove row'}">Remove row
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="${'Card number'}">Card Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input placeholder="Card Number" type="text" th:field="*{cardNumber}">
+                </td>
+                <td>
+                    <input type="submit" name="save" placeholder="Save">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+</body>
+</html>

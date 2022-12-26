@@ -1,12 +1,13 @@
-package by.bulaukin.shop_receipt.run_app;
+package by.bulaukin.shop_receipt.run_app.console;
 
 import by.bulaukin.shop_receipt.entity_to_dto.ResultEntityToDto;
 import by.bulaukin.shop_receipt.entity_to_dto.ResultEntityToDtoService;
-import by.bulaukin.shop_receipt.pars_data.DataFromRequest;
+import by.bulaukin.shop_receipt.pars_data.data.DataFromRequest;
 import by.bulaukin.shop_receipt.pars_data.DataFromRequestServices;
 import by.bulaukin.shop_receipt.pars_data.DataTypes;
 import by.bulaukin.shop_receipt.pars_data.getting_data.GettingData;
 import by.bulaukin.shop_receipt.pars_data.getting_data.GettingDataFactory;
+import by.bulaukin.shop_receipt.run_app.RunningApp;
 import by.bulaukin.shop_receipt.view.ReceiptsViewServices;
 import by.bulaukin.shop_receipt.view.print.PrintingViews;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class RunningAppFromFile implements RunningApp {
         try {
             GettingData dataFromFiles = gettingDataFactory.getClass(DataTypes.FILE);
             String[] data = dataFromFiles.parsData(dataFromConsole.getArgs());
-            DataFromRequest dataFromRequest = dataFromRequestServices.parsData(data);
+            DataFromRequest dataFromRequest = dataFromRequestServices.addDataToDatafromRequest(data);
             ResultEntityToDto result = resultEntityToDtoService.getResult(dataFromRequest);
             viewServices.createsView(result);
             printingToFile.printViews();

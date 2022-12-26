@@ -4,7 +4,7 @@ import by.bulaukin.shop_receipt.dto_service.ProductsToProductsDtoServices;
 import by.bulaukin.shop_receipt.dto_service.dto.ProductsDto;
 import by.bulaukin.shop_receipt.model.Cards;
 import by.bulaukin.shop_receipt.model.Products;
-import by.bulaukin.shop_receipt.pars_data.DataFromRequest;
+import by.bulaukin.shop_receipt.pars_data.data.DataFromRequest;
 import by.bulaukin.shop_receipt.repository.cards.GettingCards;
 import by.bulaukin.shop_receipt.repository.products.GettingProducts;
 import lombok.RequiredArgsConstructor;
@@ -41,14 +41,14 @@ public class ResultEntityToDtoService {
     }
 
     private void addProductsDtoToResult(DataFromRequest data, ResultEntityToDto result) {
-        data.getItems().forEach((k, v) -> {
+        data.getItems().forEach(items -> {
             try {
-                Products prod = getProducts(k);
+                Products prod = getProducts(items.getItemsId());
                 ProductsDto prodDto = productsToProductsDtoServices
-                        .getProductsDto(prod, v);
+                        .getProductsDto(prod, items.getItemsCount());
                 result.getProductsDtoList().add(prodDto);
             } catch (NullPointerException e) {
-                log.info("Item by id {} is not found", k);
+                log.info("Item by id {} is not found", items.getItemsId());
             }
         });
     }

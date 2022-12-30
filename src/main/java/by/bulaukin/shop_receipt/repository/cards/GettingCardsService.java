@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GettingCardsService implements GettingCards{
+public class GettingCardsService implements GettingCardsEntity {
 
     private final CardsRepo cr;
 

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GettingProductsService implements GettingProducts{
+public class GettingProductsService implements GettingProductsEntity {
 
     private final ProductsRepo pr;
     @Override

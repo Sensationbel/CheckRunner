@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-@Service(value = "gettingDataFromFile")
+@Service(value = "parsingDataFromParamsFiles")
 @Log4j2
-public class GettingDataFromFile implements GettingData {
+public class ParsingDataFromParamsFiles implements ParsingDataFromRequestsParam {
     @Override
     public <T> String[] parsData(T request) throws IOException {
 

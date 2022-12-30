@@ -3,30 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <title>Shops Receipts</title>
+    <style>
+        #input data {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #receipt {
+            position: center;
+            width: 50%;
+            border-collapse: collapse;
+        }
+
+        table {
+            margin: 25px;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        tr, td {
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
 <div id="input data">
-    <form method="post" th:action="@{/addItems}" th:object="${dataFromRequest}">
+    <form method="post" th:action="@{/addItems}" th:object="${requestsParsingResult}">
         <table>
             <thead>
             <tr>
-                <th th:text="${'Num'}"></th>
-                <th th:text="${'Prod Id'}">Row</th>
-                <th th:text="${'Prod Count'}">Variety</th>
-
-                <th>
+                <th th:text="${'Num'}">Num</th>
+                <th th:text="${'Prod Id'}">Product Id</th>
+                <th th:text="${'Prod Quantity'}">Quantity</th>
+                <td>
                     <button type="submit" name="addRow" th:text="${'Add Row'}">Add row</button>
-                </th>
+                </td>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="row,rowStat : *{items}">
+            <tr th:each="row,rowStat : *{itemsList }">
                 <td th:text="${rowStat.count}">1</td>
                 <td>
-                    <input placeholder="Items Id" type="text" th:field="*{items[__${rowStat.index}__].itemsId}">
+                    <input placeholder="Items Id" type="text" th:field="*{itemsList[__${rowStat.index}__].itemsId}"/>
                 </td>
                 <td>
-                    <input placeholder="Items count" type="text" th:field="*{items[__${rowStat.index}__].itemsCount}"/>
+                    <input placeholder="Items count" type="text" th:field="*{itemsList[__${rowStat.index}__].itemsQua}"/>
                 </td>
                 <td>
                     <button type="submit" name="removeRow"
@@ -54,6 +79,68 @@
             </tbody>
         </table>
     </form>
+</div>
+<div id="receipt" th:object="${receipts}">
+    <thead>
+    <tr>
+        <th th:text="*{receipt}"></th>
+        <br>
+        <th th:text="*{marketsId}"></th>
+        <br>
+        <th th:text="*{marketsAddress}"></th>
+        </br>
+        <th>phone</th>
+        <th th:text="*{phone}"></th>
+        </br>
+        <th>date</th>
+        <th th:text="*{date}"></th>
+        </br>
+        <th>time</th>
+        <th th:text="*{time}"></th>
+        </br>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${'Qty'}">Qty</td>
+        <span>&nbsp;</span>
+        <td>DESCRIPTION</td>
+        <span>&nbsp;</span>
+        <td>PRICE</td>
+        <span>&nbsp;</span>
+        <td>TOTAL</td>
+        <br/>
+    </tr>
+    <tr>
+        <th:block th:each="prod : *{receiptsBody}">
+            <th th:text="${prod.quantity}"></th>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <th th:text="${prod.items}"></th>
+            <span>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span>
+            <th th:text="${'$' + prod.price}"></th>
+            <span>&nbsp;</span>
+            <th th:text="${'$' + prod.itemsTotalPrice}"></th>
+            <br/>
+        </th:block>
+    </tr>
+    </tbody>
+    <tfooter>
+        <tr>
+            <th th:text="${'TOTAL'}"></th>
+            <span>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span>
+            <th th:text="*{'$' + totalPrice}"></th>
+            <br/>
+            <th:block th:if="*{discount!=0}">
+                <th th:text="${'VAT%'}"></th>
+                <span>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span>
+                <th th:text="*{discount}"></th>
+                <br/>
+                <th th:text="${'TAXABLE TOT'}"></th>
+                <span>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</span>
+                <th th:text="*{'$' + taxable}"></th>
+            </th:block>
+        </tr>
+    </tfooter>
 </div>
 </body>
 </html>

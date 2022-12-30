@@ -1,33 +1,35 @@
 package by.bulaukin.shop_receipt.entity_to_dto;
 
-import by.bulaukin.shop_receipt.dto_service.ProductsToProductsDtoServices;
+import by.bulaukin.shop_receipt.dto_service.ProductsEntityToProductsDtoServices;
 import by.bulaukin.shop_receipt.dto_service.dto.ProductsDto;
 import by.bulaukin.shop_receipt.model.Cards;
 import by.bulaukin.shop_receipt.model.Products;
-import by.bulaukin.shop_receipt.pars_data.data.DataFromRequest;
-import by.bulaukin.shop_receipt.repository.cards.GettingCards;
-import by.bulaukin.shop_receipt.repository.products.GettingProducts;
+import by.bulaukin.shop_receipt.pars_data.data.RequestsParsingResult;
+import by.bulaukin.shop_receipt.pars_data.data.ItemsFromRequest;
+import by.bulaukin.shop_receipt.repository.cards.GettingCardsEntity;
+import by.bulaukin.shop_receipt.repository.products.GettingProductsEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 @Log4j2
 public class ResultEntityToDtoService {
-    private final GettingProducts gettingProducts;
-    private final GettingCards gettingCards;
-    private final ProductsToProductsDtoServices productsToProductsDtoServices;
+    private final GettingProductsEntity productsEntity;
+    private final GettingCardsEntity cardsEntity;
+    private final ProductsEntityToProductsDtoServices dtoServices;
 
-    public ResultEntityToDto getResult(DataFromRequest data) {
+    public ResultEntityToDto getResult(RequestsParsingResult data) {
         ResultEntityToDto result = new ResultEntityToDto();
         addProductsDtoToResult(data, result);
-
         addCardDiscountToResult(data, result);
         return result;
     }
 
-    private void addCardDiscountToResult(DataFromRequest data, ResultEntityToDto result) {
+    private void addCardDiscountToResult(RequestsParsingResult data, ResultEntityToDto result) {
         try {
             result.setCardDiscount(getCards(data.getCardNumber()).getDiscount());
         } catch (NullPointerException e) {
@@ -40,26 +42,36 @@ public class ResultEntityToDtoService {
 
     }
 
-    private void addProductsDtoToResult(DataFromRequest data, ResultEntityToDto result) {
-        data.getItems().forEach(items -> {
+    private void addProductsDtoToResult(RequestsParsingResult data, ResultEntityToDto result) {
+        Map<Integer, Integer> uniqItems = getUniqItems(data.getItemsList());
+        uniqItems.forEach((id, quantity) -> {
             try {
-                Products prod = getProducts(items.getItemsId());
-                ProductsDto prodDto = productsToProductsDtoServices
-                        .getProductsDto(prod, items.getItemsCount());
+                Products prod = getProducts(id);
+                ProductsDto prodDto = dtoServices
+                        .getProductsDto(prod, quantity);
                 result.getProductsDtoList().add(prodDto);
             } catch (NullPointerException e) {
-                log.info("Item by id {} is not found", items.getItemsId());
+                log.info("Item by id {} is not found", id);
             }
         });
     }
 
+    private Map<Integer, Integer> getUniqItems(List<ItemsFromRequest> items) {
+        Map<Integer, Integer> uniqItems = new HashMap<>();
+        items.forEach(item ->{
+            int itemsCount = uniqItems.getOrDefault(item.getItemsId(), 0);
+            uniqItems.put(item.getItemsId(), item.getItemsQua() + itemsCount);
+        });
+        return uniqItems;
+    }
+
     private Products getProducts(Integer productsId) {
-        return gettingProducts.getProductsById(productsId);
+        return productsEntity.getProductsById(productsId);
 
     }
 
     private Cards getCards(Integer cardsId) {
-        return gettingCards.findCardsByCardNumber(cardsId);
+        return cardsEntity.findCardsByCardNumber(cardsId);
     }
 
 

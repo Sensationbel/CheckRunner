@@ -32,7 +32,7 @@ public class ReceiptsViewToString implements ConvertingViews{
                    .append(view.getDiscount())
                    .append("%\t\t\t\t\t\t$")
                    .append(view.getDiscountAmount())
-                   .append("\ntaxable tot")
+                   .append("\nTAXABLE TOT")
                    .append("\t\t\t\t\t$")
                    .append(view.getTaxable())
                    .append("\n____________________________\n");
@@ -74,7 +74,7 @@ public class ReceiptsViewToString implements ConvertingViews{
 
         view.getReceiptsBody().forEach(body -> {
             sb
-                    .append(body.getCount())
+                    .append(body.getQuantity())
                     .append("\t")
                     .append(body.getItems())
                     .append("\t\t")

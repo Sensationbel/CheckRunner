@@ -9,7 +9,7 @@ public class ProductsDto {
 
     private String items;
     private double price;
-    private int count;
+    private int quantity;
     private double itemsTotalPrice;
     private boolean isOnSale;
 }

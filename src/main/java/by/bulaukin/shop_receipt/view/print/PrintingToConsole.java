@@ -12,7 +12,6 @@ public class PrintingToConsole implements PrintingViews{
 
     @Override
     public void printViews() {
-
         System.out.println((String) receiptsViewToString.convertsViews());
     }
 }

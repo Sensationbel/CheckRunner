@@ -1,19 +1,17 @@
 package by.bulaukin.shop_receipt.pars_data;
 
-import by.bulaukin.shop_receipt.pars_data.data.DataFromRequest;
+import by.bulaukin.shop_receipt.pars_data.data.RequestsParsingResult;
 import by.bulaukin.shop_receipt.pars_data.data.ItemsFromRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service(value = "requestsParsingResultService")
 @Log4j2
 @RequiredArgsConstructor
-public class DataFromRequestServices{
+public class RequestsParsingResultService {
 
-    private final DataFromRequest dataFromRequest;
-
-    public DataFromRequest addDataToDatafromRequest(String[] data) {
+    public void addDataToRequestsParsingResult(String[] data, RequestsParsingResult parsingResult) {
 
         String regexItems = "(\\d+)(-)(\\d+)";
         String regexCard = "(card)(-)(\\d+)";
@@ -27,17 +25,16 @@ public class DataFromRequestServices{
                     if (d.matches(regexItems)) {
                         ItemsFromRequest items = new ItemsFromRequest();
                         items.setItemsId(Integer.valueOf(split[0]));
-                        items.setItemsCount(Integer.valueOf(split[1]));
-                        dataFromRequest.getItems().add(items);
+                        items.setItemsQua(Integer.valueOf(split[1]));
+                        parsingResult.getItemsList().add(items);
                     } else if (d.matches(regexCard)) {
-                        dataFromRequest.setCardNumber(Integer.valueOf(split[1]));
+                        parsingResult.setCardNumber(Integer.valueOf(split[1]));
                     }
                 }
             } catch (IllegalArgumentException e) {
                 log.error(e.getMessage());
             }
         }
-        return dataFromRequest;
     }
 
     private boolean validate(String data, String regexItems, String regexCard) {

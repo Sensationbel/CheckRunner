@@ -1,5 +1,5 @@
 package by.bulaukin.shop_receipt.pars_data;
 
-public enum DataTypes {
+public enum ParamsTypeEnum {
     CONSOLE, FILE, URL;
 }

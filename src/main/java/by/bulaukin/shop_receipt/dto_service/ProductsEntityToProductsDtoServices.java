@@ -5,15 +5,15 @@ import by.bulaukin.shop_receipt.model.Products;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProductsToProductsDtoServices {
+public class ProductsEntityToProductsDtoServices {
 
-    public ProductsDto getProductsDto(Products product, int countItems){
+    public ProductsDto getProductsDto(Products product, int queItems){
         ProductsDto dto = new ProductsDto();
         dto.setPrice(product.getPrice());
         dto.setItems(product.getItems());
         dto.setOnSale(product.getIsOnSale() == 1 ? true : false);
-        dto.setCount(countItems);
-        dto.setItemsTotalPrice(Math.ceil(product.getPrice() * countItems * 100)/100);
+        dto.setQuantity(queItems);
+        dto.setItemsTotalPrice(Math.ceil(product.getPrice() * queItems * 100)/100);
         return dto;
     }
 }

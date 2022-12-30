@@ -45,14 +45,14 @@ public class ReceiptsViewServices {
             if(prod.isOnSale()) {
                 onSaleDiscountServiceImpl.applyDiscount(cost);
             }
-            if(prod.getCount() > 5){
+            if(prod.getQuantity() > 5){
                 byNumberDiscountServiceIpl.applyDiscount(cost);
             }
             if (result.getCardDiscount() > 0) {
                 cost.setDiscount(result.getCardDiscount());
                 cardDiscountServiceImpl.applyDiscount(cost);
             }
-            return cost.getPrice() * prod.getCount();
+            return cost.getPrice() * prod.getQuantity();
         }).reduce(Double::sum)
                 .orElse(0.0);
     }

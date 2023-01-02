@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GettingProductsService implements GettingProductsEntity {
+public class GettingProductsEntityImpl implements GettingProductsEntity {
 
-    private final ProductsRepo pr;
+    private final ProductsEntityRepo pr;
     @Override
     public Products getProductsById(Integer id) {
         return pr

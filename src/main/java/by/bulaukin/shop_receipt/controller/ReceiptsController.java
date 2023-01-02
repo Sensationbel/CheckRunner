@@ -21,19 +21,11 @@ public class ReceiptsController {
     private final RunningApp runningAppFromUrl;
     private final ModelAndView modelAndView;
     private final ReceiptsView receiptsView;
-//    private final RequestsParsingResult requestsParsingResult;
 
     @ModelAttribute("receipts")
     public ReceiptsView receiptsView() {
         return receiptsView;
     }
-
-//    @ModelAttribute("requestsParsingResult")
-//    public RequestsParsingResult requestsParsingResult(){
-//        return requestsParsingResult;
-//    }
-
-
 
     @GetMapping("/")
     public String handleMain(Model model){

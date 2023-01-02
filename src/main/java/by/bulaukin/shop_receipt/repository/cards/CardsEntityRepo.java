@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface CardsRepo extends JpaRepository<Cards, Integer> {
+public interface CardsEntityRepo extends JpaRepository<Cards, Integer> {
 
     Optional<Cards> findCardsByCardNumber(Integer cardNumber);
 }

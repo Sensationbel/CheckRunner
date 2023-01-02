@@ -1,7 +1,7 @@
 package by.bulaukin.shop_receipt.run_app.url_run;
 
-import by.bulaukin.shop_receipt.entity_to_dto.ResultEntityToDto;
-import by.bulaukin.shop_receipt.entity_to_dto.ResultEntityToDtoService;
+import by.bulaukin.shop_receipt.entity_to_dto.ResultChangingEntityToDto;
+import by.bulaukin.shop_receipt.entity_to_dto.ChangingEntityToDtoService;
 import by.bulaukin.shop_receipt.pars_data.data.RequestsParsingResult;
 import by.bulaukin.shop_receipt.run_app.RunningApp;
 import by.bulaukin.shop_receipt.view.ReceiptsViewServices;
@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RunningAppFromUrl implements RunningApp {
 
-    private final ResultEntityToDtoService resultEntityToDtoService;
+    private final ChangingEntityToDtoService resultEntityToDtoService;
     private final ReceiptsViewServices viewServices;
     private final PrintingViews printingToUrl;
 
     @Override
-    public<T> void run( T params) {
+    public<T> void run( T requestsParam) {
 
-        ResultEntityToDto result = resultEntityToDtoService.getResult((RequestsParsingResult)params);
+        ResultChangingEntityToDto result = resultEntityToDtoService.getResult((RequestsParsingResult) requestsParam);
         viewServices.createsView(result);
         printingToUrl.printViews();
 

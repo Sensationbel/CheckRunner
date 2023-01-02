@@ -1,15 +1,15 @@
 package by.bulaukin.shop_receipt.countcost;
 
-import by.bulaukin.shop_receipt.countcost.dto.CostInfo;
+import by.bulaukin.shop_receipt.countcost.info.CostInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-@Service(value = "byNumberDiscountServiceIpl")
+@Service(value = "byNumberDiscountServiceImpl")
 @Log4j2
 @RequiredArgsConstructor
-public class ByNumberDiscountServiceIpl implements DiscountService{
+public class ByNumberDiscountServiceImpl implements DiscountService{
 
     @Value("${sales.number-discount}")
     private Short discount;

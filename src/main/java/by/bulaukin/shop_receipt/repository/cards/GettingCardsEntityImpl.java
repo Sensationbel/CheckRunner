@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class GettingCardsService implements GettingCardsEntity {
+public class GettingCardsEntityImpl implements GettingCardsEntity {
 
-    private final CardsRepo cr;
+    private final CardsEntityRepo cr;
 
     @Override
     public Cards findCardsByCardNumber(Integer cardNumber) {

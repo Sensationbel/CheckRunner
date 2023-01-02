@@ -1,10 +1,9 @@
 package by.bulaukin.shop_receipt.run_app.console_run;
 
-import by.bulaukin.shop_receipt.entity_to_dto.ResultEntityToDto;
-import by.bulaukin.shop_receipt.entity_to_dto.ResultEntityToDtoService;
+import by.bulaukin.shop_receipt.entity_to_dto.ResultChangingEntityToDto;
+import by.bulaukin.shop_receipt.entity_to_dto.ChangingEntityToDtoService;
 import by.bulaukin.shop_receipt.pars_data.ParamsTypeEnum;
 import by.bulaukin.shop_receipt.pars_data.data.RequestsParsingResult;
-import by.bulaukin.shop_receipt.pars_data.RequestsParsingResultService;
 import by.bulaukin.shop_receipt.pars_data.getting_data.ParsingDataFromRequestsParam;
 import by.bulaukin.shop_receipt.pars_data.getting_data.ParsingDataFromRequestsParamFactory;
 import by.bulaukin.shop_receipt.run_app.RunningApp;
@@ -19,20 +18,19 @@ import org.springframework.stereotype.Service;
 @Log4j2
 public class RunningAppFromConsole implements RunningApp {
 
-    private final RequestsParsingResultService requestsParsingResultService;
-    private final ResultEntityToDtoService resultEntityToDtoService;
+    private final ChangingEntityToDtoService resultEntityToDtoService;
     private final ParsingDataFromRequestsParamFactory parsingDataFromRequestsParamFactory;
     private final ReceiptsViewServices viewServices;
     private final PrintingViews printingToConsole;
 
     public <T>void run(T args) {
         String[] requestsParam = (String[]) args;
-        RequestsParsingResult parsResult = new RequestsParsingResult();
+
         try {
-            ParsingDataFromRequestsParam dataFromConsoleParam = parsingDataFromRequestsParamFactory.getClass(ParamsTypeEnum.CONSOLE);
-            String[] data = dataFromConsoleParam.parsData(requestsParam);
-            requestsParsingResultService.addDataToRequestsParsingResult(data, parsResult);
-            ResultEntityToDto result = resultEntityToDtoService.getResult(parsResult);
+            ParsingDataFromRequestsParam dataFromConsoleParam = parsingDataFromRequestsParamFactory
+                    .getClass(ParamsTypeEnum.CONSOLE);
+            RequestsParsingResult parsingResult = dataFromConsoleParam.parsData(requestsParam);
+            ResultChangingEntityToDto result = resultEntityToDtoService.getResult(parsingResult);
             viewServices.createsView(result);
             printingToConsole.printViews();
         } catch (Exception e){

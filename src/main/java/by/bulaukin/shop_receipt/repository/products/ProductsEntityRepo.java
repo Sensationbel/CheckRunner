@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface ProductsRepo extends JpaRepository<Products, Integer> {
+public interface ProductsEntityRepo extends JpaRepository<Products, Integer> {
 
     Optional<Products> getProductsById(Integer id);
 }

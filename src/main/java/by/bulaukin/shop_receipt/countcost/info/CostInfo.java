@@ -1,4 +1,4 @@
-package by.bulaukin.shop_receipt.countcost.dto;
+package by.bulaukin.shop_receipt.countcost.info;
 
 import lombok.Getter;
 import lombok.Setter;

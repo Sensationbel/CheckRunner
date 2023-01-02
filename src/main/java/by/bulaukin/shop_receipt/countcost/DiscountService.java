@@ -1,6 +1,6 @@
 package by.bulaukin.shop_receipt.countcost;
 
-import by.bulaukin.shop_receipt.countcost.dto.CostInfo;
+import by.bulaukin.shop_receipt.countcost.info.CostInfo;
 
 public interface DiscountService {
 

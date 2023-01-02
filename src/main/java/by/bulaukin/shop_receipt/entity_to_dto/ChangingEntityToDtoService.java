@@ -17,19 +17,19 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 @Log4j2
-public class ResultEntityToDtoService {
+public class ChangingEntityToDtoService {
     private final GettingProductsEntity productsEntity;
     private final GettingCardsEntity cardsEntity;
     private final ProductsEntityToProductsDtoServices dtoServices;
 
-    public ResultEntityToDto getResult(RequestsParsingResult data) {
-        ResultEntityToDto result = new ResultEntityToDto();
+    public ResultChangingEntityToDto getResult(RequestsParsingResult data) {
+        ResultChangingEntityToDto result = new ResultChangingEntityToDto();
         addProductsDtoToResult(data, result);
         addCardDiscountToResult(data, result);
         return result;
     }
 
-    private void addCardDiscountToResult(RequestsParsingResult data, ResultEntityToDto result) {
+    private void addCardDiscountToResult(RequestsParsingResult data, ResultChangingEntityToDto result) {
         try {
             result.setCardDiscount(getCards(data.getCardNumber()).getDiscount());
         } catch (NullPointerException e) {
@@ -42,7 +42,7 @@ public class ResultEntityToDtoService {
 
     }
 
-    private void addProductsDtoToResult(RequestsParsingResult data, ResultEntityToDto result) {
+    private void addProductsDtoToResult(RequestsParsingResult data, ResultChangingEntityToDto result) {
         Map<Integer, Integer> uniqItems = getUniqItems(data.getItemsList());
         uniqItems.forEach((id, quantity) -> {
             try {

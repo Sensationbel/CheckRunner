@@ -1,10 +1,10 @@
 package by.bulaukin.shop_receipt.view;
 
-import by.bulaukin.shop_receipt.countcost.ByNumberDiscountServiceIpl;
+import by.bulaukin.shop_receipt.countcost.ByNumberDiscountServiceImpl;
 import by.bulaukin.shop_receipt.countcost.DiscountService;
-import by.bulaukin.shop_receipt.countcost.dto.CostInfo;
+import by.bulaukin.shop_receipt.countcost.info.CostInfo;
 import by.bulaukin.shop_receipt.dto_service.dto.ProductsDto;
-import by.bulaukin.shop_receipt.entity_to_dto.ResultEntityToDto;
+import by.bulaukin.shop_receipt.entity_to_dto.ResultChangingEntityToDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +16,10 @@ public class ReceiptsViewServices {
 
     private final DiscountService cardDiscountServiceImpl;
     private final DiscountService onSaleDiscountServiceImpl;
-    private final ByNumberDiscountServiceIpl byNumberDiscountServiceIpl;
+    private final ByNumberDiscountServiceImpl byNumberDiscountServiceIpl;
     private final ReceiptsView.ViewsBuilder builder;
 
-    public void createsView(ResultEntityToDto result) {
+    public void createsView(ResultChangingEntityToDto result) {
 
         double totalPrice = getTotalPrice(result.getProductsDtoList());
         double taxable = getTaxable(result);
@@ -38,7 +38,7 @@ public class ReceiptsViewServices {
         return (int) Math.round(100 - (taxable * 100) / totalPrice);
     }
 
-    private double getTaxable(ResultEntityToDto result) {
+    private double getTaxable(ResultChangingEntityToDto result) {
         return result.getProductsDtoList().stream().map(prod -> {
             CostInfo cost = new CostInfo();
             cost.setPrice(prod.getPrice());

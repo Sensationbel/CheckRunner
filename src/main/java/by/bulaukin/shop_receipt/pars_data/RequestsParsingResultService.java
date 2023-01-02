@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class RequestsParsingResultService {
 
-    public void addDataToRequestsParsingResult(String[] data, RequestsParsingResult parsingResult) {
+    public RequestsParsingResult addDataToRequestsParsingResult(String[] data) {
+        RequestsParsingResult parsingResult = new RequestsParsingResult();
 
         String regexItems = "(\\d+)(-)(\\d+)";
         String regexCard = "(card)(-)(\\d+)";
@@ -35,6 +36,7 @@ public class RequestsParsingResultService {
                 log.error(e.getMessage());
             }
         }
+        return parsingResult;
     }
 
     private boolean validate(String data, String regexItems, String regexCard) {

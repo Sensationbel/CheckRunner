@@ -20,7 +20,7 @@ public class ShopReceiptApplication implements CommandLineRunner {
 		log.info("Starting the Application");
 		String[] args1 = new String[] {"11-6", "13-6", "5-1", "1-3", "20-2", "card-2569 "};
 		String[] args2 = new String[] {"C:\\Users\\Sensationbel\\Desktop\\data.txt"};
-			SpringApplication.run(ShopReceiptApplication.class, args);
+			SpringApplication.run(ShopReceiptApplication.class, args1);
 		log.info("Finished the Application");
 	}
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ResultEntityToDto {
+public class ResultChangingEntityToDto {
 
     private List<ProductsDto> productsDtoList = new ArrayList<>();
     private Short cardDiscount;

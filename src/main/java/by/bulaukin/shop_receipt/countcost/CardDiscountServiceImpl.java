@@ -16,6 +16,7 @@ public class CardDiscountServiceImpl implements DiscountService {
 
     @Override
     public void applyDiscount(CostInfo cost) {
+
         log.debug("Discount by cards is {} percent", cost.getDiscount());
         cost.setPrice(cost.getPrice() - (cost.getPrice() * cost.getDiscount() / 100));
     }

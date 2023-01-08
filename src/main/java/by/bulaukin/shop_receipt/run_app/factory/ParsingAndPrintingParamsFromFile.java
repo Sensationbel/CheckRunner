@@ -6,10 +6,12 @@ import by.bulaukin.shop_receipt.view.print.PrintingToFile;
 import by.bulaukin.shop_receipt.view.print.PrintingViews;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component("runAppFromFile")
+//@Primary
+@Service("parsingAndPrintingParamsFromFile")
 @RequiredArgsConstructor
-public class RunAppFromFile implements ParsingAndViewFactory{
+public class ParsingAndPrintingParamsFromFile implements ParsingAndPrintingViewFactory {
 
     private final ParsingDataFromParamsFiles parsingDataFromParamsFiles;
     private final PrintingToFile printingToFile;

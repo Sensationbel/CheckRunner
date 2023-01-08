@@ -1,10 +1,12 @@
 package by.bulaukin.shop_receipt.pars_data.data;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 public class ItemsFromRequest {
 
     private Integer itemsId;

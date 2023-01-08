@@ -13,7 +13,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@Component
+@Service
 @Getter
 @Setter
 @ConfigurationProperties(prefix = "shop")

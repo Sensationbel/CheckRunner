@@ -18,11 +18,13 @@ import java.util.*;
 @RequiredArgsConstructor
 @Log4j2
 public class ChangingEntityToDtoService {
+
     private final GettingProductsEntity productsEntity;
     private final GettingCardsEntity cardsEntity;
     private final ProductsEntityToProductsDtoServices dtoServices;
 
     public ResultChangingEntityToDto getResult(RequestsParsingResult data) {
+
         ResultChangingEntityToDto result = new ResultChangingEntityToDto();
         addProductsDtoToResult(data, result);
         addCardDiscountToResult(data, result);
@@ -30,6 +32,7 @@ public class ChangingEntityToDtoService {
     }
 
     private void addCardDiscountToResult(RequestsParsingResult data, ResultChangingEntityToDto result) {
+
         try {
             result.setCardDiscount(getCards(data.getCardNumber()).getDiscount());
         } catch (NullPointerException e) {
@@ -39,11 +42,11 @@ public class ChangingEntityToDtoService {
                 result.setCardDiscount((short) 0);
             }
         }
-
     }
 
     private void addProductsDtoToResult(RequestsParsingResult data, ResultChangingEntityToDto result) {
         Map<Integer, Integer> uniqItems = getUniqItems(data.getItemsList());
+
         uniqItems.forEach((id, quantity) -> {
             try {
                 Products prod = getProducts(id);
@@ -58,6 +61,7 @@ public class ChangingEntityToDtoService {
 
     private Map<Integer, Integer> getUniqItems(List<ItemsFromRequest> items) {
         Map<Integer, Integer> uniqItems = new HashMap<>();
+
         items.forEach(item ->{
             int itemsCount = uniqItems.getOrDefault(item.getItemsId(), 0);
             uniqItems.put(item.getItemsId(), item.getItemsQua() + itemsCount);
@@ -67,12 +71,9 @@ public class ChangingEntityToDtoService {
 
     private Products getProducts(Integer productsId) {
         return productsEntity.getProductsById(productsId);
-
     }
 
     private Cards getCards(Integer cardsId) {
         return cardsEntity.findCardsByCardNumber(cardsId);
     }
-
-
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class ProductsEntityToProductsDtoServices {
 
     public ProductsDto getProductsDto(Products product, int queItems){
+
         ProductsDto dto = new ProductsDto();
         dto.setPrice(product.getPrice());
         dto.setItems(product.getItems());

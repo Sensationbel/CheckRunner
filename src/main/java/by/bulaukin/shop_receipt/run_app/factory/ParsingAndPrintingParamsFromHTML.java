@@ -1,28 +1,28 @@
 package by.bulaukin.shop_receipt.run_app.factory;
 
-import by.bulaukin.shop_receipt.pars_data.getting_data.ParsingDataFromConsoleParam;
+import by.bulaukin.shop_receipt.pars_data.getting_data.ParsingDataFromHTMLParams;
 import by.bulaukin.shop_receipt.pars_data.getting_data.ParsingDataFromRequestsParam;
-import by.bulaukin.shop_receipt.view.print.PrintingToConsole;
+import by.bulaukin.shop_receipt.view.print.PrintingToHTML;
 import by.bulaukin.shop_receipt.view.print.PrintingViews;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @Primary
-@Component("runAppFromConsole")
+@Service("parsingAndPrintingParamsFromHTML")
 @RequiredArgsConstructor
-public class RunAppFromConsole implements ParsingAndViewFactory{
-
-    private final ParsingDataFromConsoleParam parsingDataFromConsoleParam;
-    private final PrintingToConsole printingToConsole;
+public class ParsingAndPrintingParamsFromHTML implements ParsingAndPrintingViewFactory {
+    private final ParsingDataFromHTMLParams parsingDataFromHTMLParams;
+    private final PrintingToHTML printingToHTML;
 
     @Override
     public ParsingDataFromRequestsParam createParsingDataFromRequestsParam() {
-        return parsingDataFromConsoleParam;
+        return parsingDataFromHTMLParams;
     }
 
     @Override
     public PrintingViews createPrintingViews() {
-        return printingToConsole;
+        return printingToHTML;
     }
 }

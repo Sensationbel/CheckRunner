@@ -17,6 +17,7 @@ public class OnSaleDiscountServiceImpl implements DiscountService{
 
     @Override
     public void applyDiscount(CostInfo cost) {
+
         log.debug("On sale discount is {} percent", discount);
         cost.setPrice(cost.getPrice() - (cost.getPrice() * discount) / 100);
     }

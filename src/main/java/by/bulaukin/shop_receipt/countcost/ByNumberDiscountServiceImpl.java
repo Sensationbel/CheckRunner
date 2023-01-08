@@ -16,6 +16,7 @@ public class ByNumberDiscountServiceImpl implements DiscountService{
 
     @Override
     public void applyDiscount(CostInfo cost) {
+
         log.debug("Discount by number is {} ", discount);
         cost.setPrice(cost.getPrice() - (cost.getPrice() * discount) / 100);
     }

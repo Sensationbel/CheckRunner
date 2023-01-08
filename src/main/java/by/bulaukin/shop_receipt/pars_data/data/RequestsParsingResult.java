@@ -12,8 +12,4 @@ public class RequestsParsingResult {
 
     private List<ItemsFromRequest> itemsList = new ArrayList<>();
     private Integer cardNumber;
-
-    public List<ItemsFromRequest> getItemsList() {
-        return itemsList;
-    }
 }
